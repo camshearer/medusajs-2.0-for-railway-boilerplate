@@ -149,10 +149,17 @@ const medusaConfig = {
           products: {
             type: 'products',
             enabled: true,
-            fields: ['id', 'title', 'description', 'handle', 'variant_sku', 'thumbnail'],
+            transformer: (product) => ({
+              id: product.id,
+              handle: product.handle,
+              title: product.title,
+              description: product.description,
+              thumbnail: product.thumbnail,
+              variants: product.variants?.map((v) => v.title).filter(Boolean) ?? [],
+            }),
             indexSettings: {
-              searchableAttributes: ['title', 'description', 'variant_sku'],
-              displayedAttributes: ['id', 'handle', 'title', 'description', 'variant_sku', 'thumbnail'],
+              searchableAttributes: ['title', 'description', 'variants'],
+              displayedAttributes: ['id', 'handle', 'title', 'description', 'thumbnail', 'variants'],
               filterableAttributes: ['id', 'handle'],
             },
             primaryKey: 'id',

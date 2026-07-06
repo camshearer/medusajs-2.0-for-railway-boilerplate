@@ -47,6 +47,7 @@ export const SearchField: React.FC<{
       return item.handle
     },
     load: async ({ filterText, signal }) => {
+      if (!filterText) return { items: [] }
       const results = await searchClient
         .index("products")
         .search<MeiliSearchProductHit>(filterText, undefined, {
@@ -161,7 +162,7 @@ export const SearchField: React.FC<{
                 <div>
                   <p className="text-base font-normal">{item.title}</p>
                   <p className="text-grayscale-500 text-xs">
-                    {item.variants[0]}
+                    {item.variants?.[0]}
                   </p>
                 </div>
                 <p className="text-base font-semibold ml-auto">

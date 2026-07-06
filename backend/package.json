@@ -40,6 +40,7 @@
   },
   "devDependencies": {
     "@medusajs/test-utils": "2.13.6",
+    "@mikro-orm/migrations": "6.6.12",
     "@react-email/preview-server": "^5.1.0",
     "@swc/core": "1.5.7",
     "@swc/jest": "^0.2.39",

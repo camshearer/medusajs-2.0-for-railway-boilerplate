@@ -2,15 +2,29 @@ const c = require("ansi-colors")
 
 const requiredEnvs = [
   {
-    key: "NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY",
-    // TODO: we need a good doc to point this to
+    key: "NEXT_PUBLIC_MEDUSA_BACKEND_URL",
     description:
-      "Learn how to create a publishable key: https://docs.medusajs.com/v2/resources/storefront-development/publishable-api-keys",
+      "Your Medusa backend, should be updated to where you are hosting your server. Remember to update CORS settings for your server. See - https://docs.medusajs.com/usage/configurations#admin_cors-and-store_cors.",
+  },
+  {
+    key: "NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY",
+    description:
+      "Your publishable key that can be attached to sales channels. See - https://docs.medusajs.com/development/publishable-api-keys.",
+  },
+  {
+    key: "NEXT_PUBLIC_BASE_URL",
+    description:
+      "Your store URL, should be updated to where you are hosting your storefront.",
+  },
+  {
+    key: "NEXT_PUBLIC_DEFAULT_REGION",
+    description:
+      'Your preferred default region. When middleware cannot determine the user region from the "x-vercel-country" header, the default region will be used. ISO-2 lowercase format.',
   },
 ]
 
 function checkEnvVariables() {
-  const missingEnvs = requiredEnvs.filter(function (env) {
+  const missingEnvs = requiredEnvs.filter((env) => {
     return !process.env[env.key]
   })
 
@@ -19,7 +33,7 @@ function checkEnvVariables() {
       c.red.bold("\n🚫 Error: Missing required environment variables\n")
     )
 
-    missingEnvs.forEach(function (env) {
+    missingEnvs.forEach((env) => {
       console.error(c.yellow(`  ${c.bold(env.key)}`))
       if (env.description) {
         console.error(c.dim(`    ${env.description}\n`))

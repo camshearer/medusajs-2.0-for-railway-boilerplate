@@ -1,2 +1,7 @@
+packages: []
+
 allowBuilds:
   sharp: true
+
+overrides:
+  webpack: "^5"

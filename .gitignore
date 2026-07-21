@@ -1,1 +1,7 @@
 .idea/
+.DS_Store
+.claude/
+
+# Local database + image backups (not for version control)
+backup-*.sql
+image-backup-*/
